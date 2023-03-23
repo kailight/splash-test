@@ -60,7 +60,7 @@ export default function Scoreboard(props:ScoreboardProps) {
       <table className={styles.table}>
         <thead>
           <tr>
-            <td>Name</td><td>Points</td><td>Multiplier</td>
+            <th>Name</th><th>Points</th><th>Multiplier</th>
           </tr>
         </thead>
         <tbody>
@@ -73,10 +73,9 @@ export default function Scoreboard(props:ScoreboardProps) {
       <div className='section-title'>Speed</div>
 
       <div className={styles.table}>
-        ToDo (always 1x)
+        ToDo (it's always 1x atm)
       </div>
 
-      <div>This is scoreboard</div>
     </div>
   )
 

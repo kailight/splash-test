@@ -53,3 +53,14 @@ a {
   margin-top: 1rem;
   margin-bottom: 0.2rem;
 }
+
+
+table thead th {
+  padding: 0.2rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+table tbody td {
+  padding: 0.2rem;
+}

@@ -6,6 +6,9 @@ import {useState} from "react";
 
 import Login from "@/components/Login";
 import Scoreboard from "@/components/Scoreboard";
+import Ranking from "@/components/Ranking";
+import Chat from "@/components/Chat";
+import Chart from "@/components/Chart";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,10 +30,14 @@ export default function Home() {
     setUser({ loggedIn: true, name })
   }
 
+  const preStartApp = (points:number, multiplier:number) => {
+    console.info('preStartApp()', points, multiplier);
+  }
+
   function LoginOrScoreboard() {
     if (user.loggedIn) {
       return (
-        <Scoreboard></Scoreboard>
+        <Scoreboard onStart={preStartApp}></Scoreboard>
       )
     }
     return (
@@ -50,9 +57,15 @@ export default function Home() {
         <div className={stylesLayout.topLeft}>
           <LoginOrScoreboard></LoginOrScoreboard>
         </div>
-        <div className={stylesLayout.topRight}>Foo2</div>
-        <div className={stylesLayout.bottomLeft}>Foo3</div>
-        <div  className={stylesLayout.bottomRight}>Foo4</div>
+        <div className={stylesLayout.topRight}>
+          <Chart></Chart>
+        </div>
+        <div className={stylesLayout.bottomLeft}>
+          <Ranking></Ranking>
+        </div>
+        <div className={stylesLayout.bottomRight}>
+          <Chat></Chat>
+        </div>
       </main>
     </>
   )

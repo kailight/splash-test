@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  gap: 1rem;
+}
+
+.statsWrapper {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  &> * {
+    flex-basis: 30%;
+    padding: 1rem 1rem;
+    font-size: 1.4rem;
+    color: #def;
+    font-weight: 600;
+    background-color: #123;
+    text-align: center;
+    border-radius: 0.5rem;
+  }
+}
+
+.chartWrapper {
+  flex-basis: 100%;
+}
