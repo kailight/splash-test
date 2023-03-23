@@ -2,10 +2,42 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import stylesLayout from '@/styles/Layout.module.scss'
+import {useState} from "react";
+
+import Login from "@/components/Login";
+import Scoreboard from "@/components/Scoreboard";
 
 const inter = Inter({ subsets: ['latin'] })
 
+
+interface User {
+  name: string,
+  loggedIn: boolean
+}
+
 export default function Home() {
+
+  const [user, setUser] = useState<User>({ name: '', loggedIn: false })
+
+  const preSetUser = (name:string) => {
+    if (name.length < 3) {
+      alert('Name is too short')
+      return
+    }
+    setUser({ loggedIn: true, name })
+  }
+
+  function LoginOrScoreboard() {
+    if (user.loggedIn) {
+      return (
+        <Scoreboard></Scoreboard>
+      )
+    }
+    return (
+      <Login onLogin={(name:string) => preSetUser(name)}></Login>
+    )
+  }
+
   return (
     <>
       <Head>
@@ -15,10 +47,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={stylesLayout.main}>
-        <div>Foo</div>
-        <div>Foo2</div>
-        <div>Foo3</div>
-        <div>Foo4</div>
+        <div className={stylesLayout.topLeft}>
+          <LoginOrScoreboard></LoginOrScoreboard>
+        </div>
+        <div className={stylesLayout.topRight}>Foo2</div>
+        <div className={stylesLayout.bottomLeft}>Foo3</div>
+        <div  className={stylesLayout.bottomRight}>Foo4</div>
       </main>
     </>
   )

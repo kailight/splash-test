@@ -1,0 +1,55 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+}
+
+.pointsWrapper {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  &> * {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .incdec {
+    padding: 0.8rem;
+    cursor: pointer;
+    color: #eef;
+    font-size: 2rem;
+    font-weight: 600;
+    user-select: none;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.table {
+  thead {
+    th {
+      padding: 0.2rem;
+      text-align: center;
+    }
+  }
+  tbody {
+    td {
+      padding: 0.2rem;
+    }
+  }
+}
+
+.title {
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  color: #def;
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+}

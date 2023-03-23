@@ -1,0 +1,29 @@
+input {
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #012;
+    outline: 0;
+    border: 1px solid #345;
+    color: #eef;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+button {
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #89a;
+    color: #fff;
+    outline: 0;
+    border: 1px solid #345;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+button.hl {
+    background-color: #f96;
+    color: #fff;
+}
