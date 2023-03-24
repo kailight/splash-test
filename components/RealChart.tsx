@@ -21,6 +21,7 @@ export default function Chart() {
   const [rawLabels, setRawLabels] = useState([0] as Array<any>);
   const [labels, setLabels] = useState([0] as Array<any>);
   const [counter, setCounter] = useState(0)
+  const [mult, setMult] = useState(0)
 
   socket.connect()
 
@@ -92,6 +93,7 @@ export default function Chart() {
   useEffect( () => {
     setValues(rawValues)
     setLabels(rawLabels)
+    setMult((rawValues.at(-1) / 100) || 0)
     console.info(rawValues);
   }, [rawValues,rawLabels] )
 
@@ -156,7 +158,7 @@ export default function Chart() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.multiplier}>100x</div>
+      <div className={styles.multiplier}>{mult}x</div>
       <LineChart type='line' options={options} data={data}></LineChart>
     </div>
   )

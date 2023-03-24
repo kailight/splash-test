@@ -9,6 +9,7 @@ import {
 import { from, Observable, takeWhile } from "rxjs";
 import { map, reduce } from 'rxjs/operators';
 import { Server } from 'socket.io';
+import rand from './rand'
 
 @WebSocketGateway({
   cors: {
@@ -29,9 +30,11 @@ export class EventsGateway {
 
 
     let stack = 0
+    const max = rand(200,900)
+
     const rng = () => {
       const rand = Math.floor(1 + stack * 0.1);
-      console.info(rand);
+      console.info(rand, max);
       stack = stack+rand
       return stack
     }
@@ -39,7 +42,7 @@ export class EventsGateway {
     let interval
     interval = setInterval( () => {
       socket.emit( "data", rng() )
-      if (stack >= 1000) {
+      if (stack >= max) {
         clearInterval(interval)
       }
     }, 50)
