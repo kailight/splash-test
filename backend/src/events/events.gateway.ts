@@ -21,14 +21,30 @@ export class EventsGateway {
   server: Server;
 
   @SubscribeMessage('events')
-  findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
-    console.info('events message received')
-    const rand = Math.floor((Math.random() * 1) + 1);
-    console.info('rand', rand);
+  findAll(...args): Observable<WsResponse<number>> {
+    const socket = args[0]
+    console.info('events message received', typeof args, Array.isArray(args))
 
-    return from([rand]).pipe(
+
+    let stack = 0
+    const rng = () => {
+      const rand = Math.floor((Math.random() * 1) + 1);
+      stack = stack+rand
+      return stack
+    }
+
+    let interval
+    interval = setInterval( () => {
+      socket.emit( "data", rng() )
+      if (stack >= 100) {
+        clearInterval(interval)
+      }
+    }, 50)
+
+    return from([0]).pipe(
       map(item => ({ event: 'data', data: item }))
     );
+
   }
 
   @SubscribeMessage('identity')
