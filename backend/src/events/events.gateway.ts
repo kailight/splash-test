@@ -20,15 +20,18 @@ export class EventsGateway {
   @WebSocketServer()
   server: Server;
 
+  // findAll(...args): Observable<WsResponse<number>> {
+
   @SubscribeMessage('events')
-  findAll(...args): Observable<WsResponse<number>> {
+  findAll(...args): any {
     const socket = args[0]
     console.info('events message received', typeof args, Array.isArray(args))
 
 
     let stack = 0
     const rng = () => {
-      const rand = Math.floor((Math.random() * 1) + 1);
+      const rand = Math.floor(1 + stack * 0.1);
+      console.info(rand);
       stack = stack+rand
       return stack
     }
@@ -36,14 +39,16 @@ export class EventsGateway {
     let interval
     interval = setInterval( () => {
       socket.emit( "data", rng() )
-      if (stack >= 100) {
+      if (stack >= 1000) {
         clearInterval(interval)
       }
     }, 50)
 
+    /*
     return from([0]).pipe(
       map(item => ({ event: 'data', data: item }))
     );
+    */
 
   }
 

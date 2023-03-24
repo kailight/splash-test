@@ -18,6 +18,8 @@ export default function Chart() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [rawData, setRawData] = useState([] as Array<any>);
   const [rawValues, setRawValues] = useState([0] as Array<any>);
+  const [rawLabels, setRawLabels] = useState([0] as Array<any>);
+  const [labels, setLabels] = useState([0] as Array<any>);
   const [counter, setCounter] = useState(0)
 
   socket.connect()
@@ -41,6 +43,10 @@ export default function Chart() {
     function onSocketDataEvent(value:number) {
       console.info('onSocketDataEvent', value);
       setRawValues((previous:any) => [...previous, value])
+      const arr = new Array(rawValues.length).keys()
+      // @ts-ignore
+      const filler = [...arr] as Array<any>
+      setRawLabels( filler )
       // setRawData( (previous:any) => [...previous, value]);
     }
 
@@ -85,11 +91,9 @@ export default function Chart() {
 
   useEffect( () => {
     setValues(rawValues)
-  }, [rawValues] )
-
-  const labels = [
-    0,1,2,3,4,5,6,7,8,9,10
-  ]
+    setLabels(rawLabels)
+    console.info(rawValues);
+  }, [rawValues,rawLabels] )
 
   /*
   const options = {
