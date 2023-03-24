@@ -24,7 +24,7 @@ https://www.chartjs.org/docs/latest/samples/animations/progressive-line.html
 
 But I think I should've used plain canvas though and draw plain points on x:time y:score instead.
 
-If I have/had more time I'll do custom canvas no problem
+If I have/had more time I'/d do custom canvas no problem
 
 ## Backend
 
