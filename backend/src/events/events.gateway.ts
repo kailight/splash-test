@@ -6,8 +6,8 @@ import {
   WsResponse,
 } from '@nestjs/websockets';
 
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { from, Observable, takeWhile } from "rxjs";
+import { map, reduce } from 'rxjs/operators';
 import { Server } from 'socket.io';
 
 @WebSocketGateway({
@@ -23,7 +23,12 @@ export class EventsGateway {
   @SubscribeMessage('events')
   findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
     console.info('events message received')
-    return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
+    const rand = Math.floor((Math.random() * 1) + 1);
+    console.info('rand', rand);
+
+    return from([rand]).pipe(
+      map(item => ({ event: 'data', data: item }))
+    );
   }
 
   @SubscribeMessage('identity')

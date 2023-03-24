@@ -26,7 +26,10 @@ export default function Chart() {
 
     function onConnect() {
       console.info('connected');
-      socket.emit("events", "test");
+      const foo = socket.emit("events", "test", (data:any) => {
+        console.info(data);
+      });
+      console.info('foo', foo);
       setIsConnected(true);
     }
 
@@ -35,23 +38,26 @@ export default function Chart() {
       setIsConnected(false);
     }
 
-    function onEventsEvent(value:any) {
-      setRawData( (previous:any) => [...previous, value]);
+    function onSocketDataEvent(value:number) {
+      console.info('onSocketDataEvent', value);
+      setRawValues((previous:any) => [...previous, value])
+      // setRawData( (previous:any) => [...previous, value]);
     }
 
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
-    socket.on('events', onEventsEvent);
+    socket.on('data', onSocketDataEvent);
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
-      socket.off('foo', onEventsEvent);
+      socket.off('data', onSocketDataEvent);
     };
 
   })
 
   let timeout:any
+  /*
   useEffect( () => {
 
     const stop = () => {
@@ -59,21 +65,27 @@ export default function Chart() {
     }
 
     timeout = setTimeout( () => {
-      const nextVal = [0,1,2,3,4,5,6,7,8,9,10].at(counter+1) as number
-      if (!nextVal) {
+      const nextVal = [0,1,2,3,4,5,6,7,8,9,10].at(counter) as number
+      if (nextVal === undefined) {
         stop()
+        return
       }
       console.info('nextVal', nextVal);
       setRawValues((previous:any) => [...previous, nextVal])
-
       console.info('rawValues', rawValues);
-      setCounter(counter+1)
       if (counter >= 10) {
         stop()
+        return
       }
+      setCounter(counter+1)
+
     }, 1000 )
   }, [counter])
+  */
 
+  useEffect( () => {
+    setValues(rawValues)
+  }, [rawValues] )
 
   const labels = [
     0,1,2,3,4,5,6,7,8,9,10
