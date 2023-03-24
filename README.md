@@ -14,7 +14,7 @@ I never used Nest before, only time when I dealt with RX is when I was working o
 
 ## Frontend
 
-It is Nuxt frontend on port 3000
+Is Nuxt frontend on port 3000
 
 ### Charts
 
@@ -28,7 +28,7 @@ If I have/had more time I'll do custom canvas no problem
 
 ## Backend
 
-Is Nest on port 3010
+Is Nest in /backend dir on port 3010
 
 # Current State
 
